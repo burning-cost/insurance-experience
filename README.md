@@ -2,9 +2,11 @@
 
 Individual policy-level Bayesian posterior experience rating for insurance pricing.
 
-The problem this solves: your GLM gives every "standard 35-year-old with a clean licence" the same premium. But a 35-year-old who has made three claims in the past four years is a different risk from one who has made none. NCD handles this crudely. This library does it properly.
+The primary use case is **motor fleet pricing**, where there is no NCD scheme and experience rating is done with static modification factors that ignore claims recency, frequency patterns, and portfolio-level variance. This library replaces those spreadsheet mod factors with proper Bayesian credibility that decays old claims, estimates variance from the portfolio, and enforces the balance property.
 
-`insurance-experience` computes a posteriori (experience-adjusted) premiums using the full claims history of each individual policy. The output is a multiplicative credibility factor that slots directly into your existing GLM rating engine:
+It also applies to any line where individual claims history should adjust the GLM prior: renewal pricing under FCA PS21/5, commercial liability experience modification, or home insurance repeat-claimant pricing.
+
+The output is a multiplicative credibility factor that slots directly into your existing GLM rating engine:
 
 ```
 posterior_premium = prior_premium × credibility_factor
@@ -15,7 +17,7 @@ Your GLM does the covariate work. This library does the longitudinal experience 
 ## Who this is for
 
 Pricing actuaries and data scientists working on:
-- Motor fleet experience rating (replacing static mod factors with time-decayed Bayesian updates)
+- **Motor fleet experience rating** — the core use case. Replaces static mod factors with time-decayed Bayesian updates. No NCD exists for fleets; this fills that gap.
 - UK personal lines renewal pricing under FCA PS21/5 (individual experience as a defensible pricing signal)
 - Commercial liability experience modification
 - Home insurance repeat-claimant pricing
