@@ -8,14 +8,15 @@ These tests are skipped when torch is not installed. They test:
 - predict_batch DataFrame output
 """
 
+import importlib.util
+
 import numpy as np
 import pytest
 
-import importlib.util
-TORCH_AVAILABLE = importlib.util.find_spec("torch") is not None
-
 from insurance_experience import ClaimsHistory
 from insurance_experience.attention import DeepAttentionModel, _TORCH_MISSING_MSG
+
+TORCH_AVAILABLE = importlib.util.find_spec("torch") is not None
 
 
 skip_if_no_torch = pytest.mark.skipif(
