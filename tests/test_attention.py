@@ -11,11 +11,8 @@ These tests are skipped when torch is not installed. They test:
 import numpy as np
 import pytest
 
-try:
-    import torch
-    TORCH_AVAILABLE = True
-except ImportError:
-    TORCH_AVAILABLE = False
+import importlib.util
+TORCH_AVAILABLE = importlib.util.find_spec("torch") is not None
 
 from insurance_experience import ClaimsHistory
 from insurance_experience.attention import DeepAttentionModel, _TORCH_MISSING_MSG
@@ -80,7 +77,7 @@ class TestDeepAttentionFit:
         histories = make_portfolio(20, rng)
         model = DeepAttentionModel(max_periods=4, n_epochs=5, random_state=42)
         model.fit(histories)
-        assert all(np.isfinite(l) for l in model.training_losses_)
+        assert all(np.isfinite(loss_val) for loss_val in model.training_losses_)
 
     def test_model_has_parameters(self):
         rng = np.random.default_rng(404)
@@ -176,10 +173,7 @@ class TestDeepAttentionGradient:
         model = DeepAttentionModel(max_periods=4, n_epochs=1, random_state=42)
         model.fit(histories)
         # After 1 epoch, parameters should have gradients
-        has_grad = any(
-            p.grad is not None for p in model.model_.parameters()
-        )
-        # Gradient may be zeroed after optimiser step; just check model trained
+        # has_grad check omitted: gradient may be zeroed after optimiser step
         assert model.is_fitted_
 
 

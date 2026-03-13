@@ -196,7 +196,6 @@ class TestEdgeCasesIntegration:
 
     def test_very_high_claim_counts(self):
         """Model should not crash or produce NaN for extreme claim counts."""
-        rng = np.random.default_rng(507)
         histories = [
             ClaimsHistory(f"P{i}", [1, 2, 3], [1, 1, 1], prior_premium=1.0)
             for i in range(20)

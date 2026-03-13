@@ -197,7 +197,7 @@ class TestDynamicForwardRecursion:
         """With q near 1, older claims retain high weight.
         The posterior should be further from the prior than with low q."""
         rng = np.random.default_rng(111)
-        histories = simulate_poisson_gamma(50, 5, p=0.8, q=0.9, rng=rng)
+        _ = simulate_poisson_gamma(50, 5, p=0.8, q=0.9, rng=rng)
 
         model_high_q = DynamicPoissonGammaModel(p0=0.5, q0=0.5)
         model_high_q.p_ = 0.8

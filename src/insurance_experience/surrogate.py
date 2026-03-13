@@ -28,7 +28,6 @@ from typing import Callable, Optional
 
 import numpy as np
 import polars as pl
-from scipy import optimize
 
 from ._types import ClaimsHistory
 from .utils import history_sufficient_stat

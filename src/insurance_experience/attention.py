@@ -24,7 +24,6 @@ Reference: Wüthrich, 'Experience Rating in Insurance Pricing', SSRN 4726206 (20
 
 from __future__ import annotations
 
-import importlib
 from typing import TYPE_CHECKING, Optional
 
 import numpy as np
@@ -258,7 +257,6 @@ class DeepAttentionModel:
             self (fitted model).
         """
         torch = _require_torch()
-        import torch.nn as nn
 
         if self.random_state is not None:
             torch.manual_seed(self.random_state)
@@ -412,7 +410,6 @@ class DeepAttentionModel:
         """
         self._check_fitted()
         torch = _require_torch()
-        import torch.nn as nn
 
         tensors = self._histories_to_tensors([history], torch)
         batch = {k: v.to(self._device_obj) for k, v in tensors.items()}

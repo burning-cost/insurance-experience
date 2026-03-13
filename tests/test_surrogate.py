@@ -3,7 +3,6 @@
 import numpy as np
 import pytest
 from insurance_experience import ClaimsHistory, SurrogateModel
-from insurance_experience.utils import history_sufficient_stat
 
 
 def make_portfolio(

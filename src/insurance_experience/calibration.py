@@ -18,7 +18,6 @@ from __future__ import annotations
 
 from typing import Callable
 
-import numpy as np
 import polars as pl
 
 from ._types import CalibrationResult, ClaimsHistory
