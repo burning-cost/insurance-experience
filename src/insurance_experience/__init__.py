@@ -53,7 +53,12 @@ from .utils import (
     seniority_weights,
 )
 
-__version__ = "0.1.0"
+from importlib.metadata import version, PackageNotFoundError
+
+try:
+    __version__ = version("insurance-experience")
+except PackageNotFoundError:
+    __version__ = "0.0.0"  # not installed
 __all__ = [
     # Data types
     "ClaimsHistory",
