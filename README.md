@@ -1,3 +1,5 @@
+⚠️ **This package has been merged into [`insurance-credibility`](https://github.com/burning-cost/insurance-credibility).** This repository is archived. Install `insurance-credibility` instead.
+
 # insurance-experience
 
 Individual policy-level Bayesian posterior experience rating for insurance pricing.
